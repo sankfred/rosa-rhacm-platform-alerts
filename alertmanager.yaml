@@ -1,0 +1,51 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: <smtp_host>:25
+  smtp_from: '<smtp_host@domain.com>'
+  smtp_require_tls: false
+receivers:
+  - name: default
+  - name: email
+    email_configs:
+    - to: 'team@domain.com'
+      require_tls: false
+      send_resolved: true
+  - name: pagerduty
+    pagerduty_configs:
+    - service_key: <pagerduty service key>
+      url: 'https://events.pagerduty.com/generic/2010-04-15/create_event.json'
+  - name: slack
+    slack_configs:
+    - api_url:: '<slack_webhook_url>'
+      channel: '<#slack channel>'
+route:
+  group_by: ['...']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  receiver: default
+  routes:
+    - matchers:
+        - alertname="ViolatedPolicyReport"
+      receiver: default
+      routes:
+        - matchers:
+            - severity="important"
+          receiver: email
+          continue: true
+        - matchers:
+            - severity="important"
+          receiver: slack
+          group_by: ['policy', 'cluster']
+    - matchers:
+        - prometheus="openshift-monitoring/k8s"
+      receiver: default
+      routes:
+        - matchers:
+            - severity="critical"
+          receiver: pagerduty
+          continue: true
+        - matchers:
+            - severity=~"critical|warning"
+          receiver: slack
+          group_by: ['alertname', 'managed_cluster']

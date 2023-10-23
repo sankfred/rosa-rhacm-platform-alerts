@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: thanos-ruler-custom-rules
+  namespace: open-cluster-management-observability
+data:
+  custom_rules.yaml: |
+    groups:
+      - name: cluster-health
+        rules:
+        - alert: PlatformAlert
+          annotations:
+            summary: Notify when alert is firing
+            description: "Cluster {{ $labels.cluster }} has alert {{ $labels.alertname }} firing with severity {{ $labels.severity }}" 
+          expr: |
+            ALERTS{alertstate="firing",severity!~"info|none"}
+          for: 1m
+          labels:
+            cluster: "{{ $labels.cluster }}"
+            alertname: "{{ $labels.alertname }}"
+            severity: "{{ $labels.severity }}"
