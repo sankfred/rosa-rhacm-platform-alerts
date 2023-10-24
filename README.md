@@ -15,18 +15,23 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 
 *NOTE:* the example query will only return an alert metric for notification.  Alert details need investigating by the responsible party.
 
-## Update alertmanager secret
+## Steps
+1. Write a promql query. Verify output in grafana.
+2. Configure a custom thanos query containing above query.
+3. Route the query output via alertmanager to 3rd party apps for notification.
+
+### Update alertmanager secret
 
 oc -n open-cluster-management-observability create secret generic alertmanager-config --from-file=alertmanager.yaml --dry-run=client -o=yaml |  oc -n open-cluster-management-observability replace secret --filename=-
 
-## Amtool reference
+### Amtool reference
 https://cloud.redhat.com/blog/how-to-use-amtool-to-manage-red-hat-advanced-cluster-management-for-kubernetes-alerts
 
-## Query alerts
+### Query alerts
 
 oc rsh observability-alertmanager-0 amtool alert query --alertmanager.url http://localhost:9093
 
-## Query specific alerts
+### Query specific alerts
 
 oc rsh observability-alertmanager-0 amtool alert query alertname="PlatformAlert" --alertmanager.url http://localhost:9093 -o json|jq -r .[]
 
