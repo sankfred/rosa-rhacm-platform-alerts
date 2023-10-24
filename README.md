@@ -18,10 +18,10 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 ## Steps 
 cluster: RHACM<br>
 namespace: open-cluster-management-observability
-1. Write a promql query that returns alert data. Verify output in grafana.
-2. Configure a custom thanos query containing above query. <thanos-ruler-custom-rules.yaml>
-3. Configure alertmanager to route query output to 3rd party apps for notification. <alertmanager.yaml>
-4. Validate routing rules with amtool
+1. [Write a custom promql alert query. Verify output in grafana.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step1/)
+2. [Configure a custom thanos query containing above query.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step2/)
+3. [Configure alertmanager to route query output to 3rd party apps for notification.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step3/)
+4. [Validate routing rules with amtool.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step4/)
 
 ## Implementation & Troubleshooting
 ### Prometheus Query (PromQL) Docs
