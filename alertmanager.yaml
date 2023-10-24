@@ -16,7 +16,7 @@ receivers:
       url: 'https://events.pagerduty.com/generic/2010-04-15/create_event.json'
   - name: slack
     slack_configs:
-    - api_url:: '<slack_webhook_url>'
+    - api_url: '<slack_webhook_url>'
       channel: '<#slack channel>'
 route:
   group_by: ['...']
