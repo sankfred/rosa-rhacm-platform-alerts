@@ -18,10 +18,10 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 ## Steps 
 cluster: RHACM<br>
 namespace: open-cluster-management-observability
-1. [Write a custom promql alert query. Verify output in grafana.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step1/)
-2. [Configure a custom thanos rule containing above query.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step2/)
-3. [Configure alertmanager to route query output to 3rd party apps for notification.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step3/)
-4. [Validate routing rules with amtool.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step4/)
+1. [Write a custom promql alert query. Verify output in grafana.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#step-1-promql-alert-query)
+2. [Configure a custom thanos rule containing above query.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#step-2-custom-thanos-rule/)
+3. [Configure alertmanager to route query output to 3rd party apps for notification.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step-3-alertmanager-secret/)
+4. [Validate routing rules with amtool.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step-4-validate-routing-rules/)
 
 ## Step 1: Promql alert query
 Write a custom promql alert query. Verify output on the RHACM grafana instance.
