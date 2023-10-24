@@ -45,6 +45,7 @@ route:
       routes:
         - matchers:
             - severity="critical"
+            - clusterSet="prod"
           receiver: pagerduty
           continue: true
         - matchers:
