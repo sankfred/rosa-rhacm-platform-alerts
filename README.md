@@ -58,7 +58,7 @@ Query specific alerts:<br>
 https://prometheus.io/docs/prometheus/latest/querying/basics/
 
 ### Thanos Custom Rules
-https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/observing_environments/observing-environments-intro#creating-custom-rules
+https://access.redhat.com/documentation/en-us/red_hat_advanced_cluster_management_for_kubernetes/2.2/html/observing_environments/observing-environments-intro#customizing-observability
 
 ### Alertmanager config
 
