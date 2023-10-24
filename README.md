@@ -16,7 +16,7 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 *NOTE:* the example query will only return an alert metric for notification.  Alert details need investigating by the responsible party.
 
 ## Steps 
-cluster: RHACM 
+cluster: RHACM<br>
 namespace: open-cluster-management-observability
 1. Write a promql query that returns alert data. Verify output in grafana.
 2. Configure a custom thanos query containing above query. <thanos-ruler-custom-rules.yaml>
