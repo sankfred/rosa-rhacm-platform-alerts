@@ -11,12 +11,14 @@ https://issues.redhat.com/browse/OBSDA-529
 
 __Workaround:__ 
 
-On the RHACM cluster open-cluster-management-observability namespace, create a custom thanos platform alert query. Route alerts via a master alertmanager config.
+On the RHACM cluster open-cluster-management-observability namespace, create a custom thanos rule containing alert query(s). Route alerts via a master alertmanager config.
 
 *NOTE:* the example query will only return an alert metric for notification.  Alert details need investigating by the responsible party.
 
-## Steps
-1. Write a promql query. Verify output in grafana.
+## Steps 
+cluster: RHACM 
+namespace: open-cluster-management-observability
+1. Write a promql query that returns alert data. Verify output in grafana.
 2. Configure a custom thanos query containing above query. <thanos-ruler-custom-rules.yaml>
 3. Configure alertmanager to route query output to 3rd party apps for notification. <alertmanager.yaml>
 4. Validate routing rules with amtool

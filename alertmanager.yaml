@@ -14,10 +14,12 @@ receivers:
     pagerduty_configs:
     - service_key: <pagerduty service key>
       url: 'https://events.pagerduty.com/generic/2010-04-15/create_event.json'
+      send_resolved: true
   - name: slack
     slack_configs:
     - api_url: '<slack_webhook_url>'
       channel: '<#slack channel>'
+      send_resolved: true
 route:
   group_by: ['...']
   group_wait: 30s
