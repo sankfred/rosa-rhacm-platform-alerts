@@ -17,8 +17,14 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 
 ## Steps
 1. Write a promql query. Verify output in grafana.
-2. Configure a custom thanos query containing above query.
-3. Route the query output via alertmanager to 3rd party apps for notification.
+2. Configure a custom thanos query containing above query. <thanos-ruler-custom-rules.yaml>
+3. Configure alertmanager to route query output to 3rd party apps for notification. <alertmanager.yaml>
+4. Validate routing rules with amtool
+
+## Implementation & Troubleshooting
+### Prometheus Query (PromQL) Docs
+
+https://prometheus.io/docs/prometheus/latest/querying/basics/
 
 ### Update alertmanager secret
 
@@ -34,7 +40,3 @@ oc rsh observability-alertmanager-0 amtool alert query --alertmanager.url http:/
 ### Query specific alerts
 
 oc rsh observability-alertmanager-0 amtool alert query alertname="PlatformAlert" --alertmanager.url http://localhost:9093 -o json|jq -r .[]
-
-## Prometheus Query (PromQL) Docs
-
-https://prometheus.io/docs/prometheus/latest/querying/basics/
