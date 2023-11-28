@@ -6,7 +6,7 @@ ROSA customers are prevented from reporting prometheus platform alerts via alert
 
 __Solution:__
 
-Engineering is actively working on migrating the ROSA managed cluster-monitoring-config configmap to a cluster resource in a future release.
+Engineering is actively working on migrating the ROSA managed cluster-monitoring-config configmap to a custom resource in a future release.
 https://issues.redhat.com/browse/OBSDA-529
 
 __Workaround:__ 
