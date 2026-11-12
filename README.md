@@ -18,10 +18,10 @@ On the RHACM cluster open-cluster-management-observability namespace, create a c
 ## Steps 
 cluster: RHACM<br>
 namespace: open-cluster-management-observability
-1. [Write a custom promql alert query. Verify output in grafana.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#step-1-promql-alert-query)
-2. [Configure a custom thanos rule containing above query.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#step-2-custom-thanos-rule-configmap/)
-3. [Configure alertmanager to route query output to 3rd party apps for notification.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step-3-alertmanager-secret/)
-4. [Validate routing rules with amtool.](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#Step-4-validate-routing-rules/)
+1. [Write a custom promql alert query. Verify output in grafana.](#step-1-promql-alert-query)
+2. [Configure a custom thanos rule containing above query.](#step-2-custom-thanos-rule-configmap)
+3. [Configure alertmanager to route query output to 3rd party apps for notification.](#step-3-alertmanager-secret)
+4. [Validate routing rules with amtool.](#step-4-validate-routing-rules)
 
 ## Step 1: Promql alert query
 Write a custom promql alert query. Verify output on the RHACM grafana instance.
@@ -33,14 +33,14 @@ Complex query to include RHACM clusterSet[prod|dev|si] for further classificatio
 `sum without(clusterID) (label_replace(ALERTS{alertstate="firing",severity="critical"}, "managed_cluster_id", "$1", "clusterID", "(.*)")) * on (managed_cluster_id) group_left(clusterSet) sum(label_replace(acm_managed_cluster_labels, "clusterSet", "$1", "cluster_open_cluster_management_io_clusterset", "(.*)")) without(cluster_open_cluster_management_io_clusterset)`
 
 ## Step 2: Custom Thanos Rule ConfigMap
-[See the below example thanos-ruler-custom-rules.yaml](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#file-thanos-ruler-custom-rules-yaml)
+[See the example thanos-ruler-custom-rules.yaml](manifests/thanos-ruler-custom-rules.yaml)
 
 ## Step 3: Alertmanager Secret
 
-[See the below example alertmanager.yaml](https://gist.github.com/sankfred/05c6b9bbd6352dd213db933fb0de75d2#file-alertmanager-yaml)
+[See the example alertmanager.yaml](manifests/alertmanager.yaml)
 
 Update secret:<br>
-`oc -n open-cluster-management-observability create secret generic alertmanager-config --from-file=alertmanager.yaml --dry-run=client -o=yaml |  oc -n open-cluster-management-observability replace secret --filename=-`
+`oc -n open-cluster-management-observability create secret generic alertmanager-config --from-file=alertmanager.yaml=manifests/alertmanager.yaml --dry-run=client -o=yaml |  oc -n open-cluster-management-observability replace secret --filename=-`
 
 ## Step 4: Validate routing rules
 
@@ -66,4 +66,3 @@ https://prometheus.io/docs/alerting/latest/configuration/
 
 ### Amtool reference
 https://cloud.redhat.com/blog/how-to-use-amtool-to-manage-red-hat-advanced-cluster-management-for-kubernetes-alerts
-
